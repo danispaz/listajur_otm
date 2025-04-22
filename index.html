@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="pt-br" ng-app="notebooks">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Busca com Lupa</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <style>
+    body {
+      font-family: 'Calibri Light', sans-serif;
+      background: #fff;
+           margin: 0;
+  padding: 0;
+  height: 100%;
+      overflow: hidden; /* <- ESSENCIAL pra sumir a rolagem do body */
+    }
+
+    #notebooks {
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  background-color: #f4f4f4;
+  padding: 0 16px;
+  box-sizing: border-box;
+}
+
+
+.fixed-filters {
+  position: sticky;
+  top: 0;
+  background-color: #f4f4f4;
+  padding: 16px 0 12px;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+
+    .search-container {
+      position: relative;
+      margin-bottom: 15px;
+    }
+
+    .search-container input {
+      width: 100%;
+      height: 44px;
+      padding: 10px 12px 10px 42px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .search-icon {
+      position: absolute;
+      top: 50%;
+      left: 14px;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: #0000008a;
+      pointer-events: none;
+    }
+
+    select {
+      width: 100%;
+      height: 36px;
+      padding: 5px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+      border-radius: 4px;
+    }
+
+    .product-count {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 15px;
+    }
+
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      width: 100%;
+    }
+
+    li {
+      background: white;
+      padding: 12px 15px;
+      border-left: 4px solid #3fccb9;
+      margin-bottom: 10px;
+      border-radius: 4px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    strong {
+      display: block;
+      color: #444;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 5px;
+    }
+
+    .title-row strong {
+      font-weight: bold;
+      font-size: 16px;
+      color: #444;
+      margin: 0;
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .code {
+      font-size: 12px;
+      color: #888;
+      margin-left: 10px;
+      flex-shrink: 0;
+    }
+
+    .material-symbols-outlined {
+  vertical-align: middle;
+  font-size: 20px;
+  margin-right: 6px;
+  color: #0000008a
+}
+
+
+    /* Garante que o layout use toda a tela no mobile */
+    @media (max-width: 600px) {
+  html, body {
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+  }
+
+  #notebooks {
+    padding: 16px 12px;
+  }
+
+  .fixed-filters {
+    padding: 16px 0 10px;
+  }
+
+  .search-container input {
+    width: 100%;
+    font-size: 18px;
+    height: 52px;
+    padding: 10px 12px 10px 42px;
+    border: 1px solid #ccc;
+  }
+
+  select {
+    width: 100%;
+    font-size: 18px;
+    height: 48px;
+    margin-bottom: 16px;
+    padding: 8px 10px;
+  }
+
+  .product-count {
+    font-size: 18px;
+    margin-bottom: 16px;
+  }
+
+  li {
+    padding: 20px 16px;
+  }
+
+  .title-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .title-row strong {
+    font-size: 20px;
+    white-space: normal;
+    line-height: 1.4;
+  }
+
+  .code {
+    font-size: 17px;
+    color: #666;
+    margin-left: 0;
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.6;
+  }
+}
+
+
+
+  </style>
+</head>
+
+<body ng-controller="NotebookListCtrl">
+  <div id="notebooks">
+    
+    <div class="fixed-filters">
+      <div class="search-container">
+        <i class="fas fa-search search-icon"></i>
+        <input
+          type="text"
+          id="query"
+          ng-model="query"
+          placeholder="Pesquisar produtos…"
+          autocomplete="off"
+        />
+      </div>
+
+      <select ng-model="orderList">
+        <option value="name">Ordenar por Nome (A–Z)</option>
+        <option value="-age">Ordenar por Mais Recentes</option>
+        <option value="age">Ordenar por Mais Antigos</option>
+      </select>
+
+      <div class="product-count">
+        <span class="material-symbols-outlined">package_2</span>
+        Produtos: {{(notebooks | filter:query).length}}
+      </div>
+      
+
+    </div> <!-- Fim da fixed-filters -->
+
+    <div class="product-list">
+      <ul>
+        <li ng-repeat="notebook in notebooks | filter:query | orderBy: orderList">
+          <div class="title-row">
+            <strong>{{notebook.name}}</strong>
+            <span class="code">{{notebook.age}}</span>
+          </div>
+          <p>{{notebook.procesor}}</p>
+        </li>
+      </ul>
+    </div>
+    
+
+
+  <script>
+    var notebooks = angular.module('notebooks', []);
+
+    notebooks.controller('NotebookListCtrl', function ($scope) {
+      $scope.notebooks = [
+        {
+          name: "Acordo de Sócios e Acionistas / Pacto Familiar",
+          procesor: "Estrutura acordos entre sócios, acionistas ou familiares para definir regras de gestão, sucessão, entrada e saída de membros e resolução de conflitos, garantindo segurança jurídica e continuidade do negócio.",
+          age: "JUR01"
+        },
+        {
+          name: "Planejamento Sucessório e Patrimonial (Holding e Administradora de Bens)",
+          procesor: "Estrutura a sucessão e a proteção do patrimônio familiar por meio de holding ou administradora de bens, com foco em economia tributária, blindagem jurídica e continuidade segura dos bens e empresas entre gerações.",
+          age: "JUR04"
+        },
+        {
+          name: "Reorganização Societária (Incorporação, Fusão E Cisão)",
+          procesor: "Planeja e executa processos de reorganização societária, como incorporação, fusão e cisão, com foco em eficiência tributária, alinhamento estratégico e conformidade legal entre empresas ou estruturas familiares.",
+          age: "JUR05"
+        },
+
+        {
+          name: "Fusões e Aquisições (M&A)",
+          procesor: "Conduz processos de fusões e aquisições (M&A), desde a análise estratégica até a estruturação jurídica e tributária da operação, garantindo segurança, valorização do negócio e tomada de decisão assertiva.",
+          age: "JUR214"
+        },
+
+        {
+          name: "Auditoria para verificação de adequação à LGPD",
+          procesor: "Realiza auditoria para avaliar se a empresa está em conformidade com a LGPD, identificando riscos, falhas e oportunidades de adequação na coleta, uso e proteção de dados pessoais, com foco em segurança jurídica e governança.",
+          age: "JUR02",
+        },
+
+        {
+          name: "Consultoria para implementação de Compliance e Antissuborno",
+          procesor: "Estrutura programas de compliance e antissuborno, com políticas, controles e treinamentos para prevenir fraudes, garantir integridade nas relações e atender às exigências legais e de governança corporativa.",
+          age: "JUR06",
+        },
+
+        {
+          name: "Consultoria em LGPD",
+          procesor: "Elabora, revisa e gerencia contratos empresariais com foco em segurança jurídica, clareza nas obrigações e prevenção de riscos, garantindo relações comerciais sólidas e alinhadas à legislação.",
+          age: "JUR209",
+        },
+
+        {
+          name: "Gestão e elaboração de Contratos Empresariais",
+          procesor: "Analisa e revisa a tributação aplicada aos produtos e serviços (NCM, CST, CFOP, alíquotas), corrigindo erros que podem gerar pagamento indevido de tributos ou risco de autuação, com foco em conformidade e economia fiscal.",
+          age: "JUR08"
+        },
+
+        {
+          name: "Reconhecimento de Crédito de ICMS sobre os Insumos do Transporte",
+          procesor: "Amplia a base de insumos que geram crédito de ICMS para transportadoras, incluindo itens além dos previstos no RICMS, como lubrificantes, peças, ARLA e materiais de manutenção, com respaldo legal e foco na recuperação segura de créditos.",
+          age: "JUR07"
+        },
+
+        {
+          name: "Reconhecimento de Imunidade de PIS COFINS em operações para Zona Franca de Manaus e Áreas de Livre Comércio",
+          procesor: "Busca o reconhecimento da imunidade de PIS e COFINS sobre receitas de fretes contratados por pessoas físicas ou jurídicas da Zona Franca de Manaus e Áreas de Livre Comércio, garantindo isenção legal e economia tributária.",
+          age: "JUR114"
+        },
+
+        
+        {
+          name: "Reconhecimento de Imunidade PIS/COFINS – Operações Destinadas à Exportação",
+          procesor: "Reconhece a imunidade de PIS e COFINS em operações com mercadorias destinadas à exportação, garantindo o não pagamento dessas contribuições e permitindo a recuperação de valores pagos indevidamente, com respaldo constitucional.",
+          age: "JUR121"
+        },
+
+        {
+          name: "Reconhecimento de Manutenção dos créditos de PIS e COFINS sobre o ICMS nas entradas",
+          procesor: "Aplica tese jurídica que reconhece o direito à redução da base de cálculo do INSS sobre pagamentos a autônomos, de 20% para 11,71%, gerando economia previdenciária com respaldo legal e segurança na gestão da folha.",
+          age: "JUR09"
+        },
+
+        {
+          name: "Reconhecimento de Redução da Base de  Cálculo do INSS Autônomos para 11,71%",
+          procesor: "Aplica tese jurídica que reconhece o direito à redução da base de cálculo do INSS sobre pagamentos a autônomos, de 20% para 11,71%, gerando economia previdenciária com respaldo legal e segurança na gestão da folha.",
+          age: "JUR117"
+        },
+
+        {
+          name: "Reconhecimento de Exclusão do ICMS / ISS da Base do PIS e COFINS",
+          procesor: "Aplica teses jurídicas que garantem a exclusão do ICMS e/ou ISS da base de cálculo do PIS e da COFINS, permitindo a recuperação de valores pagos indevidamente e a redução legal da carga tributária futura.",
+          age: "JUR105"
+        },
+
+
+        {
+          name: "Reconhecimento de Exclusão do Crédito Presumido ICMS do IRPJ E CSLL",
+          procesor: "Aplica a tese jurídica que permite a exclusão do crédito presumido de ICMS da base de cálculo do IRPJ e da CSLL, evitando bitributação e possibilitando a recuperação de valores pagos indevidamente, com respaldo do STF.",
+          age: "JUR106"
+        },
+
+        {
+          name: "Reconhecimento de Exclusão do PIS / COFINS de sua Própria Base",
+          procesor: "Aplica a tese que permite excluir o PIS e a COFINS da própria base de cálculo, evitando a cobrança em cascata e possibilitando a recuperação de valores pagos a mais, com respaldo jurídico e foco na redução da carga tributária.",
+          age: "JUR107"
+        },
+
+        {
+          name: "Reconhecimento de Imunidade de ICMS no Transporte de Mercadorias Destinadas a Exportação",
+          procesor: "Busca o reconhecimento jurídico da imunidade do ICMS incidente sobre o transporte de mercadorias destinadas à exportação, com fundamento constitucional, garantindo a exclusão da cobrança indevida e a segurança jurídica das operações.",
+          age: "JUR110"
+        },
+
+        {
+          name: "Reconhecimento de Não incidência de Contribuição Previdenciária sobre PLR de diretores estatutários",
+          procesor: "Aplica tese jurídica que reconhece a não incidência de contribuição previdenciária sobre valores pagos a título de PLR a diretores estatutários, garantindo segurança jurídica e redução de encargos sobre a remuneração variável.",
+          age: "JUR10"
+        },
+
+
+        {
+          name: "Reconhecimento de Exclusão da base de cálculo do INSS os valores pagos aos aprendizes",
+          procesor: "Aplica tese jurídica que reconhece a exclusão dos valores pagos a aprendizes da base de cálculo do INSS, garantindo economia previdenciária e afastando cobranças indevidas com respaldo na legislação e jurisprudência.",
+          age: "JUR11"
+        },
+
+        {
+          name: "Diferimento do IRPJ/CSLL e PIS/COFINS sobre a contrapartida da Indústria ao Fundo de Risco e Garantia (Fundão)",
+          procesor: "Aplica tese jurídica que permite o diferimento do IRPJ, CSLL, PIS e COFINS sobre os valores repassados pela indústria ao Fundo de Risco e Garantia (Fundão), postergando a tributação e garantindo segurança jurídica e eficiência fiscal.",
+          age: "JUR12"
+        },
+
+        
+        {
+          name: "Reconhecimento de Crédito de PIS e COFINS sobre o IPI recuperável e não recuperável",
+          procesor: "Reconhece o direito ao crédito de PIS e COFINS sobre valores de IPI destacados nas notas fiscais de entrada, tanto recuperáveis quanto não recuperáveis, garantindo aproveitamento fiscal ampliado com respaldo legal e jurisprudencial.",
+          age: "JUR101-01"
+        },
+
+        {
+          name: "Inexigibilidade da TFTG e CEG no Maranhão",
+          procesor: "Busca obter declaração judicial de inexigibilidade da TFTG e da CEG cobradas pelo Estado do Maranhão, com o objetivo de afastar cobranças indevidas e viabilizar a recuperação de valores pagos sem respaldo legal.",
+          age: "JUR13"
+        },
+
+        {
+          name: "Reconhecimento de Imunidade de PIS, COFINS e ISS sobre Armazenagem ",
+          procesor: "Busca interpretação favorável para reconhecer que a armazenagem integra a cadeia de exportação, garantindo a imunidade de PIS, COFINS e ISS sobre essa receita, com respaldo constitucional e foco na redução da carga tributária.",
+          age: "JUR14"
+        },
+
+        {
+          name: "Reconhecimento de Imunidade de FUNRURAL na exportação de produtos comercializados por produtos rurais pessoas físicas",
+          procesor: "Busca o reconhecimento da imunidade da contribuição ao FUNRURAL sobre a receita de exportação de produtos comercializados por produtores rurais pessoas físicas, com base constitucional, garantindo isenção legal e recuperação de valores pagos indevidamente.",
+          age: "JUR15"
+        },
+
+        {
+          name: "Reconhecimento de Crédito de PIS e COFINS sobre Insumos Estratégicos no Transporte",
+          procesor: "Aplica tese jurídica que amplia o conceito de insumo no setor de transporte, reconhecendo o direito ao crédito de PIS e COFINS sobre despesas como plano de saúde, plano odontológico, vale alimentação e softwares de controle de frota, com respaldo na atividade-fim e na jurisprudência.",
+          age: "JUR101-02"
+        },
+
+        {
+          name: "Reconhecimento Judicial de Crédito de ICMS em Transporte Internacional",
+          procesor: "Busca declaração judicial que reconheça o direito da transportadora ao aproveitamento de créditos de ICMS em operações cujo transporte se encerra fora do território nacional, garantindo economia tributária com respaldo legal e constitucional.",
+          age: "JUR16"
+        },
+
+        {
+          name: "Declaração de Estorno de crédito de ICMS em operações de transporte iniciados em outros estados",
+          procesor: "Busca declaração judicial que permita à transportadora a não realizar o estorno dos créditos de ICMS nas operações de transporte iniciadas em outros estados, assegurando a manutenção dos créditos com respaldo legal e segurança fiscal.",
+          age: "JUR17"
+        },
+
+        {
+          name: "Due Diligence",
+          procesor: "Procedimento de investigação profunda sobre aspectos jurídicos, financeiros, fiscais e operacionais da empresa, com o objetivo de identificar riscos e passivos que possam impactar compradores, investidores, fornecedores e demais stakeholders.",
+          age: "JUR213"
+        },
+
+        {
+          name: "Defesas de demandas perante a ANTT",
+          procesor: "Elabora e conduz defesas administrativas e recursos perante a ANTT, em demandas relacionadas a autos de infração, penalidades e exigências regulatórias, garantindo segurança jurídica e preservação dos direitos da transportadora.",
+          age: "JUR18"
+        },
+
+        
+        {
+          name: "Defesas em Execuções Fiscais",
+          procesor: "Atua na defesa de empresas em execuções fiscais, com estratégias jurídicas para contestar cobranças indevidas, suspender exigibilidades e preservar o patrimônio, garantindo segurança jurídica e gestão eficiente de passivos tributários.",
+          age: "JUR19"
+        },
+
+        {
+          name: "Defesas, Impugnações e Recursos Administrativos",
+          procesor: "Atuação completa em Direito Civil, englobando demandas não previstas em produtos específicos, como ações indenizatórias, possessórias, execuções, cobranças e demais disputas civis, com foco em soluções estratégicas e segurança jurídica.",
+          age: "JUR03"
+        },
+
+        
+        {
+          name: "Demandas de Direito Civil",
+          procesor: "Atua em demandas diversas de Direito Civil, como indenizações, ações possessórias, execuções, cobranças e outras disputas judiciais, oferecendo soluções jurídicas completas e seguras conforme a necessidade do cliente.",
+          age: "JUR201"
+        },
+
+        {
+          name: "Demandas do Direito Trabalhista",
+          procesor: "Atua na apresentação de defesas em processos administrativos e judiciais, representação perante sindicatos e Ministério Público do Trabalho, além da homologação de acordos extrajudiciais, garantindo segurança jurídica e gestão estratégica de passivos.",
+          age: "JUR202"
+        },
+
+        {
+          name: "Demandas de Direito Administrativo",
+          procesor: "Atuação completa em Direito Administrativo, abrangendo demandas não previstas em outros produtos específicos, como defesas em processos administrativos, questões envolvendo contratos públicos, pareceres jurídicos e relações com a Administração Pública.",
+          age: "JUR204"
+        },
+
+        {
+          name: "Demandas de Direito Tributário",
+          procesor: "Atuação em demandas contenciosas e consultivas de Direito Tributário, abrangendo execuções fiscais, defesas administrativas, ações anulatórias, mandados de segurança, restituições e orientações estratégicas para redução de riscos e passivos fiscais.",
+          age: "JUR206"
+        },
+
+        
+        {
+          name: "Demandas de Direito de Família e Sucessões",
+          procesor: "Atuação em ações judiciais e extrajudiciais relacionadas ao Direito de Família e Sucessões, como divórcios, partilhas, inventários, guarda, alimentos e testamentos, com foco na proteção patrimonial, mediação de conflitos e segurança jurídica.",
+          age: "JUR207"
+        },
+
+        {
+          name: "Demandas de Direito Empresarial",
+          procesor: "Atuação em disputas e questões jurídicas que envolvem empresas, como conflitos societários, responsabilidade de sócios e administradores, cobrança de contratos empresariais, dissoluções e reorganizações, com foco em segurança jurídica e preservação do negócio.",
+          age: "JUR20"
+        },
+
+        {
+          name: "Jurídico Recorrente",
+          procesor: "Prestação contínua de serviços jurídicos para empresas, com acompanhamento consultivo e contencioso em diversas áreas do direito, atendimento a demandas rotineiras, elaboração de pareceres, contratos e defesas, garantindo suporte estratégico e segurança jurídica no dia a dia.",
+          age: "JUR21"
+        },
+
+        {
+          name: "Terceirização de Cobranças",
+          procesor: "Atua na recuperação de créditos por meio da cobrança extrajudicial e judicial, com gestão completa do processo, negociação com devedores e adoção de medidas legais, garantindo eficiência na recuperação e redução da inadimplência empresarial.",
+          age: "JUR22"
+        },
+
+        {
+          name: "Constituição e Regularização de Empresas",
+          procesor: "Realiza a abertura e regularização de empresas em todas as esferas, incluindo registro em órgãos competentes, obtenção de licenças e enquadramentos fiscais, garantindo conformidade legal e segurança desde a formalização até a operação",
+          age: "JUR23"
+        },
+
+        {
+          name: "Mandado de Segurança",
+          procesor: "Ajuizamento de mandado de segurança para proteger direitos líquidos e certos diante de ilegalidades ou abusos de autoridade praticados por agentes públicos, com foco em garantir a efetividade dos direitos da empresa com agilidade e segurança jurídica.",
+          age: "JUR100"
+        },
+
+        {
+          name: "Não Incidência de Funrural sobre Operações PJ",
+          procesor: "Aplica tese jurídica que reconhece a não incidência da contribuição ao Funrural em operações realizadas entre pessoas jurídicas, garantindo segurança jurídica e possibilitando a recuperação de valores pagos indevidamente pelo adquirente",
+          age: "JUR24"
+        },
+
+        {
+          name: "Reconhecimento de Crédito de PIS / COFINS Sobre PJ e PF",
+          procesor: "Reconhece o direito ao crédito de PIS e COFINS em aquisições realizadas de pessoas físicas ou jurídicas não contribuintes, com base em interpretação ampliada da legislação, gerando economia tributária e segurança jurídica para o adquirente.",
+          age: "JUR101"
+        },
+
+        {
+          name: "Reconhecimento da Exclusão de ICMS e ISS na Base da CPRB",
+          procesor: "Reconhece o direito ao crédito de PIS e COFINS em aquisições realizadas de pessoas físicas ou jurídicas não contribuintes, com base em interpretação ampliada da legislação, gerando economia tributária e segurança jurídica para o adquirente.",
+          age: "JUR113"
+        },
+
+        
+        {
+          name: "Reconhecimento de Não Incidência de IRPJ e CSLL sobre Juros de Correção Monetária (Selic)",
+          procesor: "Aplica tese jurídica que reconhece a não incidência de IRPJ e CSLL sobre valores recebidos a título de correção monetária (Selic) em repetição de indébito, afastando a tributação sobre verbas de natureza indenizatória e viabilizando a recuperação de valores pagos indevidamente.",
+          age: "JUR103"
+        },
+
+
+        {
+          name: "Reconhecimento de Imunidade CPRB  Operações Destinadas a Exportação",
+          procesor: "Aplica tese jurídica que reconhece a imunidade da Contribuição Previdenciária sobre Receita Bruta (CPRB) nas receitas decorrentes de operações de exportação, com respaldo constitucional e foco na redução da carga tributária.",
+          age: "JUR122"
+        },
+
+        {
+          name: "Reconhecimento de Crédito de PIS/COFINS sobre Taxas de DETRAN e ANTT",
+          procesor: "Aplica tese jurídica que reconhece o direito ao crédito de PIS e COFINS sobre valores pagos compulsoriamente a título de taxas e contribuições ao DETRAN e à ANTT, com foco no setor de transporte e respaldo na essencialidade para a atividade-fim.",
+          age: "JUR211"
+        },
+
+        {
+          name: "Reconhecimento de Subvenção em Importações",
+          procesor: "Reconhece o tratamento de incentivos fiscais estaduais concedidos em importações como subvenção para investimento, permitindo a exclusão desses valores da base de cálculo do IRPJ e da CSLL, com respaldo legal e jurisprudencial.",
+          age: "JUR212"
+        },
+
+        {
+          name: "Ressarcimento INSS Sob Sistema S",
+          procesor: "Aplica tese jurídica para recuperação de valores pagos indevidamente a título de contribuições destinadas ao Sistema “S”, INCRA e Salário-Educação, com base em interpretação legal e decisões dos tribunais superiores, viabilizando compensações e alívio da carga tributária sobre a folha.",
+          age: "JUR215"
+        },
+
+        {
+          name: "Reconhecimento de Suspensão do PIS / COFINS das Operações Destinadas a Recinto Alfandegado",
+          procesor: "Aplica tese jurídica para recuperação de valores pagos indevidamente a título de contribuições destinadas ao Sistema “S”, INCRA e Salário-Educação, com base em interpretação legal e decisões dos tribunais superiores, viabilizando compensações e alívio da carga tributária sobre a folha.",
+          age: "JUR218"
+        },
+
+        
+        {
+          name: "Reconhecimento de Nao Incidencia de PIS/COFINS Sobre o Credito Presumido",
+          procesor: "Aplica tese jurídica que reconhece a não incidência de PIS e COFINS sobre créditos presumidos de ICMS concedidos pelos estados como incentivo fiscal, com base em jurisprudência consolidada do STF, viabilizando recuperação de valores pagos indevidamente.",
+          age: "JUR28"
+        },
+
+        {
+          name: "Reconhecimento de Exclusão dos Benefícios Fiscais de ICMS da Base De Cálculo do IRPJ/CSLL - Subvenções",
+          procesor: "Aplica tese jurídica que permite a exclusão de subvenções fiscais de ICMS da base de cálculo do IRPJ e da CSLL, conforme entendimento do STF, garantindo redução da carga tributária e recuperação de valores pagos indevidamente.",
+          age: "JUR102"
+        },
+
+        {
+          name: "Reconhecimento de INSS sobre verbas indenizatórias",
+          procesor: "Aplica tese jurídica que reconhece a natureza indenizatória de determinadas verbas pagas aos empregados, afastando a incidência de INSS sobre esses valores e possibilitando a recuperação de contribuições previdenciárias pagas indevidamente.",
+          age: "JUR108"
+        },
+
+        {
+          name: "Exclusão do ICMS ST da Base do PIS e COFINS",
+          procesor: "Aplica tese jurídica que reconhece o direito de excluir o ICMS-ST da base de cálculo do PIS e da COFINS, com fundamento em jurisprudência do STF, permitindo a recuperação de valores pagos indevidamente e a redução da carga tributária futura",
+          age: "JUR109"
+        },
+
+        {
+          name: "Reconhecimento de Não Incidência de PIS/COFINS sobre Receitas Financeiras",
+          procesor: "Aplica tese jurídica que busca o reconhecimento da não incidência de PIS e COFINS sobre receitas financeiras, como rendimentos de aplicações, juros e variações monetárias, visando à redução da carga tributária e recuperação de valores pagos indevidamente.",
+          age: "JUR112"
+        },
+
+        {
+          name: "Reconhecimento de Crédito de PIS/COFINS S/ ICMS-ST de Compra",
+          procesor: "Aplica tese jurídica que reconhece o direito ao crédito de PIS e COFINS sobre o valor do ICMS-ST incidente nas aquisições de mercadorias, ampliando a base de aproveitamento de créditos e gerando economia tributária com respaldo jurisprudencial.",
+          age: "JUR120"
+        },
+
+        {
+          name: "Assessoria Juridica",
+          procesor: "Prestação de suporte jurídico consultivo contínuo, com orientação estratégica sobre aspectos legais das atividades empresariais, análise de riscos, revisão de contratos e apoio na tomada de decisões, garantindo segurança jurídica no dia a dia da operação.",
+          age: "JUR200"
+        },
+
+        {
+          name: "Reconhecimento de Não  incidência  PIS/COFINS Sobre SELIC",
+          procesor: "Aplica tese jurídica que reconhece a natureza indenizatória da SELIC recebida em devoluções de tributos (repetição de indébito), afastando a incidência de PIS e COFINS sobre esses valores e viabilizando a recuperação de tributos pagos indevidamente.",
+          age: "JUR203"
+        },
+
+        
+        {
+          name: "Exclusão do ICMS na Base de Cálculo dos Créditos de PIS/COFINS - (Lei N° 14.592/23)",
+          procesor: "Aplica a exclusão do ICMS da base de cálculo dos créditos de PIS e COFINS, conforme previsto na Lei nº 14.592/23, promovendo adequação à nova legislação, revisão de apurações e eventual recuperação de créditos utilizados indevidamente.",
+          age: "JUR216"
+        },
+
+        {
+          name: "Reconhecimento de Imunidade de ISS/ICMS nos fretes destinados à exportação",
+          procesor: "Busca o reconhecimento da imunidade de ISS e ICMS sobre serviços de transporte vinculados à exportação de mercadorias, com base constitucional, garantindo a não tributação dos fretes e a redução legal da carga tributária nas operações internacionais.",
+          age: "JUR26"
+        },
+
+        {
+          name: "Exclusão do Crédito Presumido de ICMS da Base de Cálculo PIS/COFINS",
+          procesor: "Aplica tese jurídica que reconhece a exclusão dos créditos presumidos de ICMS da base de cálculo do PIS e da COFINS, com fundamento em decisão do STF, evitando bitributação e viabilizando a recuperação de valores pagos indevidamente.",
+          age: "JUR27"
+        }
+
+
+
+
+
+
+
+        
+        
+      ];
+      $scope.orderList = "name";
+    });
+  </script>
+</body>
+</html>
