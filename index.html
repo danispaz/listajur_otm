@@ -202,7 +202,15 @@
     line-height: 1.6;
   }
 }
+.form-icon {
+  color: #888;
+  font-size: 18px;
+  transition: color 0.2s ease;
+}
 
+.form-icon:hover {
+  color: #0078d4;
+}
 
 
   </style>
@@ -242,10 +250,21 @@
         <li ng-repeat="notebook in notebooks | filter:query | orderBy: orderList">
           <div class="title-row">
             <strong>{{notebook.name}}</strong>
-            <span class="code">{{notebook.age}}</span>
+        
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <span class="code">{{notebook.age}}</span>
+              <a 
+                ng-href="{{notebook.url}}" 
+                target="_blank" 
+                class="form-icon" 
+                title="Ver página do produto">
+                <i class="fas fa-file-alt"></i>
+              </a>
+            </div>
           </div>
           <p>{{notebook.procesor}}</p>
         </li>
+     
       </ul>
     </div>
     
@@ -259,392 +278,446 @@
         {
           name: "Acordo de Sócios e Acionistas / Pacto Familiar",
           procesor: "Estrutura acordos entre sócios, acionistas ou familiares para definir regras de gestão, sucessão, entrada e saída de membros e resolução de conflitos, garantindo segurança jurídica e continuidade do negócio.",
-          age: "JUR01"
+          age: "JUR01",
+           url: "https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Acordo-de-S%C3%B3cios-e-Acionistas---Pacto-Familiar.aspx"
         },
         {
           name: "Planejamento Sucessório e Patrimonial (Holding e Administradora de Bens)",
           procesor: "Estrutura a sucessão e a proteção do patrimônio familiar por meio de holding ou administradora de bens, com foco em economia tributária, blindagem jurídica e continuidade segura dos bens e empresas entre gerações.",
-          age: "JUR04"
+          age: "JUR04",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Planejamento-Sucess%C3%B3rio-e-Patrimonial-(Holding-e-Administradora-de-Bens).aspx"
         },
         {
           name: "Reorganização Societária (Incorporação, Fusão E Cisão)",
           procesor: "Planeja e executa processos de reorganização societária, como incorporação, fusão e cisão, com foco em eficiência tributária, alinhamento estratégico e conformidade legal entre empresas ou estruturas familiares.",
-          age: "JUR05"
+          age: "JUR05",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reorganiza%C3%A7%C3%A3o-Societ%C3%A1ria-(Incorpora%C3%A7%C3%A3o,-Fus%C3%A3o-E-Cis%C3%A3o).aspx"
         },
 
         {
           name: "Fusões e Aquisições (M&A)",
           procesor: "Conduz processos de fusões e aquisições (M&A), desde a análise estratégica até a estruturação jurídica e tributária da operação, garantindo segurança, valorização do negócio e tomada de decisão assertiva.",
-          age: "JUR214"
+          age: "JUR214",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Fus%C3%B5es-e-Aquisi%C3%A7%C3%B5es-(M&A).aspx"
         },
 
         {
           name: "Auditoria para verificação de adequação à LGPD",
           procesor: "Realiza auditoria para avaliar se a empresa está em conformidade com a LGPD, identificando riscos, falhas e oportunidades de adequação na coleta, uso e proteção de dados pessoais, com foco em segurança jurídica e governança.",
           age: "JUR02",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Auditoria-para-verifica%C3%A7%C3%A3o-de-adequa%C3%A7%C3%A3o-%C3%A0-LGPD.aspx"
         },
 
         {
           name: "Consultoria para implementação de Compliance e Antissuborno",
           procesor: "Estrutura programas de compliance e antissuborno, com políticas, controles e treinamentos para prevenir fraudes, garantir integridade nas relações e atender às exigências legais e de governança corporativa.",
           age: "JUR06",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Consultoria-para-implementa%C3%A7%C3%A3o-de-Compliance-e-Antissuborno.aspx"
         },
 
         {
           name: "Consultoria em LGPD",
-          procesor: "Elabora, revisa e gerencia contratos empresariais com foco em segurança jurídica, clareza nas obrigações e prevenção de riscos, garantindo relações comerciais sólidas e alinhadas à legislação.",
+          procesor: "Consultoria jurídica especializada para adequação à Lei Geral de Proteção de Dados (Lei nº 13.709/2018), com diagnóstico, mapeamento de riscos e implementação de políticas, contratos e controles internos que garantam a conformidade legal no tratamento de dados pessoais. A consultoria pode incluir também treinamentos, pareceres e acompanhamento jurídico em eventuais incidentes ou comunicações com a ANPD.",
           age: "JUR209",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Consultoria-em-LGPD.aspx"
         },
 
         {
           name: "Gestão e elaboração de Contratos Empresariais",
           procesor: "Redação, revisão e análise de contratos empresariais diversos, com linguagem jurídica adequada e cláusulas personalizadas conforme os interesses das partes envolvidas na negociação. O serviço pode abranger tanto a elaboração do zero quanto a revisão técnica e estratégica de documentos já existentes.",
-          age: "JUR08"
+          age: "JUR08",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Gest%C3%A3o-e-elabora%C3%A7%C3%A3o-de-Contratos-Empresariais.aspx"
         },
 
         {
           name: "Reconhecimento de Crédito de ICMS sobre os Insumos do Transporte",
           procesor: "Amplia a base de insumos que geram crédito de ICMS para transportadoras, incluindo itens além dos previstos no RICMS, como lubrificantes, peças, ARLA e materiais de manutenção, com respaldo legal e foco na recuperação segura de créditos.",
-          age: "JUR07"
+          age: "JUR07",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-Cr%C3%A9dito-de-ICMS-sobre-os-Insumos-do-Transporte.aspx"
         },
 
         {
           name: "Reconhecimento de Imunidade de PIS COFINS em operações para Zona Franca de Manaus e Áreas de Livre Comércio",
           procesor: "Busca o reconhecimento da imunidade de PIS e COFINS sobre receitas de fretes contratados por pessoas físicas ou jurídicas da Zona Franca de Manaus e Áreas de Livre Comércio, garantindo isenção legal e economia tributária.",
-          age: "JUR114"
+          age: "JUR114",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-Imunidade-de-PIS-COFINS-em-opera%C3%A7%C3%B5es-para-Zona-Franca-de-Manaus-e-%C3%81reas-de-Livre-Com%C3%A9rcio.aspx"
         },
 
         
         {
           name: "Reconhecimento de Imunidade PIS/COFINS – Operações Destinadas à Exportação",
           procesor: "Reconhece a imunidade de PIS e COFINS em operações com mercadorias destinadas à exportação, garantindo o não pagamento dessas contribuições e permitindo a recuperação de valores pagos indevidamente, com respaldo constitucional.",
-          age: "JUR121"
+          age: "JUR121",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-Imunidade-PIS-COFINS-%E2%80%93-Opera%C3%A7%C3%B5es-Destinadas-%C3%A0-Exporta%C3%A7%C3%A3o.aspx"
         },
 
         {
           name: "Reconhecimento de Manutenção dos créditos de PIS e COFINS sobre o ICMS nas entradas",
-          procesor: "Aplica tese jurídica que reconhece o direito à redução da base de cálculo do INSS sobre pagamentos a autônomos, de 20% para 11,71%, gerando economia previdenciária com respaldo legal e segurança na gestão da folha.",
-          age: "JUR09"
+          procesor: "Consultoria jurídica e tributária voltada à reivindicação do direito de manutenção dos créditos de PIS e COFINS sobre o ICMS incidente nas operações de entrada de insumos. O serviço visa contestar a vedação trazida pela Lei 14.592/23, considerada inconstitucional, promovendo a recuperação de valores indevidamente recolhidos nos últimos 5 anos.",
+          age: "JUR09",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-Manuten%C3%A7%C3%A3o-dos-cr%C3%A9ditos-de-PIS-e-COFINS-sobre-o-ICMS-nas-entradas.aspx"
         },
 
         {
           name: "Reconhecimento de Redução da Base de  Cálculo do INSS Autônomos para 11,71%",
           procesor: "Aplica tese jurídica que reconhece o direito à redução da base de cálculo do INSS sobre pagamentos a autônomos, de 20% para 11,71%, gerando economia previdenciária com respaldo legal e segurança na gestão da folha.",
-          age: "JUR117"
+          age: "JUR117",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-Redu%C3%A7%C3%A3o-da-Base-de-C%C3%A1lculo-do-INSS-Aut%C3%B4nomos-para-11,71-.aspx"
         },
 
         {
           name: "Reconhecimento de Exclusão do ICMS / ISS da Base do PIS e COFINS",
           procesor: "Aplica teses jurídicas que garantem a exclusão do ICMS e/ou ISS da base de cálculo do PIS e da COFINS, permitindo a recuperação de valores pagos indevidamente e a redução legal da carga tributária futura.",
-          age: "JUR105"
+          age: "JUR105",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-Exclus%C3%A3o-do-ICMS---ISS-da-Base-do-PIS-e-COFINS.aspx"
         },
 
 
         {
           name: "Reconhecimento de Exclusão do Crédito Presumido ICMS do IRPJ E CSLL",
           procesor: "Aplica a tese jurídica que permite a exclusão do crédito presumido de ICMS da base de cálculo do IRPJ e da CSLL, evitando bitributação e possibilitando a recuperação de valores pagos indevidamente, com respaldo do STF.",
-          age: "JUR106"
+          age: "JUR106",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-Exclus%C3%A3o-do-Cr%C3%A9dito-Presumido-ICMS-do-IRPJ-E-CSLL.aspx"
         },
 
         {
           name: "Reconhecimento de Exclusão do PIS / COFINS de sua Própria Base",
           procesor: "Aplica a tese que permite excluir o PIS e a COFINS da própria base de cálculo, evitando a cobrança em cascata e possibilitando a recuperação de valores pagos a mais, com respaldo jurídico e foco na redução da carga tributária.",
-          age: "JUR107"
+          age: "JUR107",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-Exclus%C3%A3o-do-PIS---COFINS-de-sua-Pr%C3%B3pria-Base.aspx"
         },
 
         {
           name: "Reconhecimento de Imunidade de ICMS no Transporte de Mercadorias Destinadas a Exportação",
           procesor: "Busca o reconhecimento jurídico da imunidade do ICMS incidente sobre o transporte de mercadorias destinadas à exportação, com fundamento constitucional, garantindo a exclusão da cobrança indevida e a segurança jurídica das operações.",
-          age: "JUR110"
+          age: "JUR110",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-Imunidade-de-ICMS-no-Transporte-de-Mercadorias-Destinadas-a-Exporta%C3%A7%C3%A3o.aspx"
         },
 
         {
           name: "Reconhecimento de Não incidência de Contribuição Previdenciária sobre PLR de diretores estatutários",
           procesor: "Aplica tese jurídica que reconhece a não incidência de contribuição previdenciária sobre valores pagos a título de PLR a diretores estatutários, garantindo segurança jurídica e redução de encargos sobre a remuneração variável.",
-          age: "JUR10"
+          age: "JUR10",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-N%C3%A3o-incid%C3%AAncia-de-Contribui%C3%A7%C3%A3o-Previdenci%C3%A1ria-sobre-PLR-de-diretores-estatut%C3%A1rios.aspx"
         },
 
 
         {
           name: "Reconhecimento de Exclusão da base de cálculo do INSS os valores pagos aos aprendizes",
           procesor: "Aplica tese jurídica que reconhece a exclusão dos valores pagos a aprendizes da base de cálculo do INSS, garantindo economia previdenciária e afastando cobranças indevidas com respaldo na legislação e jurisprudência.",
-          age: "JUR11"
+          age: "JUR11",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-Exclus%C3%A3o-da-base-de-c%C3%A1lculo-do-INSS-os-valores-pagos-aos-aprendizes.aspx"
         },
 
         {
           name: "Diferimento do IRPJ/CSLL e PIS/COFINS sobre a contrapartida da Indústria ao Fundo de Risco e Garantia (Fundão)",
           procesor: "Aplica tese jurídica que permite o diferimento do IRPJ, CSLL, PIS e COFINS sobre os valores repassados pela indústria ao Fundo de Risco e Garantia (Fundão), postergando a tributação e garantindo segurança jurídica e eficiência fiscal.",
-          age: "JUR12"
+          age: "JUR12",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Diferimento-do-IRPJ-CSLL-e-PIS-COFINS-sobre-a-contrapartida-da-Ind%C3%BAstria-ao-Fundo-de-Risco-e-Garantia-(Fund%C3%A3o).aspx"
         },
 
         
         {
           name: "Reconhecimento de Crédito de PIS e COFINS sobre o IPI recuperável e não recuperável",
           procesor: "Reconhece o direito ao crédito de PIS e COFINS sobre valores de IPI destacados nas notas fiscais de entrada, tanto recuperáveis quanto não recuperáveis, garantindo aproveitamento fiscal ampliado com respaldo legal e jurisprudencial.",
-          age: "JUR101-01"
+          age: "JUR101-01",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-Cr%C3%A9dito-de-PIS-e-COFINS-sobre-o-IPI-recuper%C3%A1vel-e-n%C3%A3o-recuper%C3%A1vel.aspx"
         },
 
         {
           name: "Inexigibilidade da TFTG e CEG no Maranhão",
           procesor: "Busca obter declaração judicial de inexigibilidade da TFTG e da CEG cobradas pelo Estado do Maranhão, com o objetivo de afastar cobranças indevidas e viabilizar a recuperação de valores pagos sem respaldo legal.",
-          age: "JUR13"
+          age: "JUR13",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Inexigibilidade-da-TFTG-e-CEG-no-Maranh%C3%A3o.aspx"
         },
 
         {
           name: "Reconhecimento de Imunidade de PIS, COFINS e ISS sobre Armazenagem ",
           procesor: "Busca interpretação favorável para reconhecer que a armazenagem integra a cadeia de exportação, garantindo a imunidade de PIS, COFINS e ISS sobre essa receita, com respaldo constitucional e foco na redução da carga tributária.",
-          age: "JUR14"
+          age: "JUR14",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-Imunidade-de-PIS,-COFINS-e-ISS-sobre-Armazenagem.aspx"
         },
 
         {
           name: "Reconhecimento de Imunidade de FUNRURAL na exportação de produtos comercializados por produtos rurais pessoas físicas",
           procesor: "Busca o reconhecimento da imunidade da contribuição ao FUNRURAL sobre a receita de exportação de produtos comercializados por produtores rurais pessoas físicas, com base constitucional, garantindo isenção legal e recuperação de valores pagos indevidamente.",
-          age: "JUR15"
+          age: "JUR15",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-Imunidade-de-FUNRURAL-na-exporta%C3%A7%C3%A3o-de-produtos-comercializados-por-produtos-rurais-pessoas.aspx"
         },
 
         {
           name: "Reconhecimento de Crédito de PIS e COFINS sobre Insumos Estratégicos no Transporte",
           procesor: "Aplica tese jurídica que amplia o conceito de insumo no setor de transporte, reconhecendo o direito ao crédito de PIS e COFINS sobre despesas como plano de saúde, plano odontológico, vale alimentação e softwares de controle de frota, com respaldo na atividade-fim e na jurisprudência.",
-          age: "JUR101-02"
+          age: "JUR101-02",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-Cr%C3%A9dito-de-PIS-e-COFINS-sobre-Insumos-Estrat%C3%A9gicos-no-Transporte.aspx"
         },
 
         {
           name: "Reconhecimento Judicial de Crédito de ICMS em Transporte Internacional",
           procesor: "Busca declaração judicial que reconheça o direito da transportadora ao aproveitamento de créditos de ICMS em operações cujo transporte se encerra fora do território nacional, garantindo economia tributária com respaldo legal e constitucional.",
-          age: "JUR16"
+          age: "JUR16",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Reconhecimento-Judicial-de-Cr%C3%A9dito-de-ICMS-em-Transporte-Internacional.aspx"
         },
 
         {
           name: "Declaração de Estorno de crédito de ICMS em operações de transporte iniciados em outros estados",
           procesor: "Busca declaração judicial que permita à transportadora a não realizar o estorno dos créditos de ICMS nas operações de transporte iniciadas em outros estados, assegurando a manutenção dos créditos com respaldo legal e segurança fiscal.",
-          age: "JUR17"
+          age: "JUR17",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Declara%C3%A7%C3%A3o-de-Estorno-de-cr%C3%A9dito-de-ICMS-em-opera%C3%A7%C3%B5es-de-transporte-iniciados-em-outros-estados.aspx"
         },
 
         {
           name: "Due Diligence",
           procesor: "Procedimento de investigação profunda sobre aspectos jurídicos, financeiros, fiscais e operacionais da empresa, com o objetivo de identificar riscos e passivos que possam impactar compradores, investidores, fornecedores e demais stakeholders.",
-          age: "JUR213"
+          age: "JUR213",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Due-Diligence.aspx"
         },
 
         {
           name: "Defesas de demandas perante a ANTT",
           procesor: "Elabora e conduz defesas administrativas e recursos perante a ANTT, em demandas relacionadas a autos de infração, penalidades e exigências regulatórias, garantindo segurança jurídica e preservação dos direitos da transportadora.",
-          age: "JUR18"
+          age: "JUR18",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Defesas-de-Demandas-Perante-a-ANTT.aspx"
         },
 
         
         {
           name: "Defesas em Execuções Fiscais",
           procesor: "Atua na defesa de empresas em execuções fiscais, com estratégias jurídicas para contestar cobranças indevidas, suspender exigibilidades e preservar o patrimônio, garantindo segurança jurídica e gestão eficiente de passivos tributários.",
-          age: "JUR19"
+          age: "JUR19",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Defesas-em-Execu%C3%A7%C3%B5es-Fiscais.aspx"
         },
 
         {
           name: "Defesas, Impugnações e Recursos Administrativos",
           procesor: "Atuação completa em Direito Civil, englobando demandas não previstas em produtos específicos, como ações indenizatórias, possessórias, execuções, cobranças e demais disputas civis, com foco em soluções estratégicas e segurança jurídica.",
-          age: "JUR03"
+          age: "JUR03",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Defesas,-Impugna%C3%A7%C3%B5es-e-Recursos-Administrativos.aspx"
         },
 
         
         {
           name: "Demandas de Direito Civil",
           procesor: "Atua em demandas diversas de Direito Civil, como indenizações, ações possessórias, execuções, cobranças e outras disputas judiciais, oferecendo soluções jurídicas completas e seguras conforme a necessidade do cliente.",
-          age: "JUR201"
+          age: "JUR201",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Demandas-de-Direito-Civil.aspx"
         },
 
         {
           name: "Demandas do Direito Trabalhista",
           procesor: "Atua na apresentação de defesas em processos administrativos e judiciais, representação perante sindicatos e Ministério Público do Trabalho, além da homologação de acordos extrajudiciais, garantindo segurança jurídica e gestão estratégica de passivos.",
-          age: "JUR202"
+          age: "JUR202",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Demandas-do-Direito-Trabalhista.aspx"
         },
 
         {
           name: "Demandas de Direito Administrativo",
           procesor: "Atuação completa em Direito Administrativo, abrangendo demandas não previstas em outros produtos específicos, como defesas em processos administrativos, questões envolvendo contratos públicos, pareceres jurídicos e relações com a Administração Pública.",
-          age: "JUR204"
+          age: "JUR204",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Demandas-de-Direito-Administrativo.aspx"
         },
 
         {
           name: "Demandas de Direito Tributário",
           procesor: "Atuação em demandas contenciosas e consultivas de Direito Tributário, abrangendo execuções fiscais, defesas administrativas, ações anulatórias, mandados de segurança, restituições e orientações estratégicas para redução de riscos e passivos fiscais.",
-          age: "JUR206"
+          age: "JUR206",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Demandas-de-Direito-Tribut%C3%A1rio.aspx"
         },
 
         
         {
           name: "Demandas de Direito de Família e Sucessões",
           procesor: "Atuação em ações judiciais e extrajudiciais relacionadas ao Direito de Família e Sucessões, como divórcios, partilhas, inventários, guarda, alimentos e testamentos, com foco na proteção patrimonial, mediação de conflitos e segurança jurídica.",
-          age: "JUR207"
+          age: "JUR207",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Demandas-de-Direito-de-Fam%C3%ADlia-e-Sucess%C3%B5es.aspx"
         },
 
         {
           name: "Demandas de Direito Empresarial",
           procesor: "Atuação em disputas e questões jurídicas que envolvem empresas, como conflitos societários, responsabilidade de sócios e administradores, cobrança de contratos empresariais, dissoluções e reorganizações, com foco em segurança jurídica e preservação do negócio.",
-          age: "JUR20"
+          age: "JUR20",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Demandas-de-Direito-Empresarial.aspx"
         },
 
         {
           name: "Jurídico Recorrente",
           procesor: "Prestação contínua de serviços jurídicos para empresas, com acompanhamento consultivo e contencioso em diversas áreas do direito, atendimento a demandas rotineiras, elaboração de pareceres, contratos e defesas, garantindo suporte estratégico e segurança jurídica no dia a dia.",
-          age: "JUR21"
+          age: "JUR21",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Jur%C3%ADdico-Recorrente.aspx"
         },
 
         {
           name: "Terceirização de Cobranças",
           procesor: "Atua na recuperação de créditos por meio da cobrança extrajudicial e judicial, com gestão completa do processo, negociação com devedores e adoção de medidas legais, garantindo eficiência na recuperação e redução da inadimplência empresarial.",
-          age: "JUR22"
+          age: "JUR22",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Terceiriza%C3%A7%C3%A3o-de-Cobran%C3%A7as.aspx"
         },
 
         {
           name: "Constituição e Regularização de Empresas",
           procesor: "Realiza a abertura e regularização de empresas em todas as esferas, incluindo registro em órgãos competentes, obtenção de licenças e enquadramentos fiscais, garantindo conformidade legal e segurança desde a formalização até a operação",
-          age: "JUR23"
+          age: "JUR23",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Constitui%C3%A7%C3%A3o-e-Regulariza%C3%A7%C3%A3o-de-Empresas.aspx"
         },
 
         {
           name: "Mandado de Segurança",
           procesor: "Ajuizamento de mandado de segurança para proteger direitos líquidos e certos diante de ilegalidades ou abusos de autoridade praticados por agentes públicos, com foco em garantir a efetividade dos direitos da empresa com agilidade e segurança jurídica.",
-          age: "JUR100"
+          age: "JUR100",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Mandado-de-Seguran%C3%A7a.aspx"
         },
 
         {
           name: "Não Incidência de Funrural sobre Operações PJ",
           procesor: "Aplica tese jurídica que reconhece a não incidência da contribuição ao Funrural em operações realizadas entre pessoas jurídicas, garantindo segurança jurídica e possibilitando a recuperação de valores pagos indevidamente pelo adquirente",
-          age: "JUR24"
+          age: "JUR24",
+          url: "https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/N%C3%A3o-Incid%C3%AAncia-de-Funrural-sobre-Opera%C3%A7%C3%B5es-PJ.aspx"
         },
 
         {
           name: "Reconhecimento de Crédito de PIS / COFINS Sobre PJ e PF",
           procesor: "Reconhece o direito ao crédito de PIS e COFINS em aquisições realizadas de pessoas físicas ou jurídicas não contribuintes, com base em interpretação ampliada da legislação, gerando economia tributária e segurança jurídica para o adquirente.",
-          age: "JUR101"
+          age: "JUR101",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-Cr%C3%A9dito-de-PIS---COFINS-Sobre-PJ-e-PF.aspx"
         },
 
         {
           name: "Reconhecimento da Exclusão de ICMS e ISS na Base da CPRB",
-          procesor: "Reconhece o direito ao crédito de PIS e COFINS em aquisições realizadas de pessoas físicas ou jurídicas não contribuintes, com base em interpretação ampliada da legislação, gerando economia tributária e segurança jurídica para o adquirente.",
-          age: "JUR113"
+          procesor: "Análise jurídica e técnica para excluir o ICMS e ISS da base de cálculo da Contribuição Previdenciária sobre a Receita Bruta (CPRB), garantindo redução da carga tributária e recuperação de valores pagos indevidamente, com base em jurisprudência consolidada.",
+          age: "JUR113",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-da-Exclus%C3%A3o-de-ICMS-e-ISS-na-Base-da-CPRB.aspx"
         },
 
         
         {
           name: "Reconhecimento de Não Incidência de IRPJ e CSLL sobre Juros de Correção Monetária (Selic)",
           procesor: "Aplica tese jurídica que reconhece a não incidência de IRPJ e CSLL sobre valores recebidos a título de correção monetária (Selic) em repetição de indébito, afastando a tributação sobre verbas de natureza indenizatória e viabilizando a recuperação de valores pagos indevidamente.",
-          age: "JUR103"
+          age: "JUR103",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-N%C3%A3o-Incid%C3%AAncia-de-IRPJ-e-CSLL-sobre-Juros-de-Corre%C3%A7%C3%A3o-Monet%C3%A1ria-(Selic).aspx"
         },
 
 
         {
           name: "Reconhecimento de Imunidade CPRB  Operações Destinadas a Exportação",
           procesor: "Aplica tese jurídica que reconhece a imunidade da Contribuição Previdenciária sobre Receita Bruta (CPRB) nas receitas decorrentes de operações de exportação, com respaldo constitucional e foco na redução da carga tributária.",
-          age: "JUR122"
+          age: "JUR122",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-Imunidade-CPRB-Opera%C3%A7%C3%B5es-Destinadas-a-Exporta%C3%A7%C3%A3o.aspx"
         },
 
         {
           name: "Reconhecimento de Crédito de PIS/COFINS sobre Taxas de DETRAN e ANTT",
           procesor: "Aplica tese jurídica que reconhece o direito ao crédito de PIS e COFINS sobre valores pagos compulsoriamente a título de taxas e contribuições ao DETRAN e à ANTT, com foco no setor de transporte e respaldo na essencialidade para a atividade-fim.",
-          age: "JUR211"
+          age: "JUR211",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-Cr%C3%A9dito-de-PIS-COFINS-sobre-Taxas-de-DETRAN-e-ANTT.aspx"
         },
 
         {
           name: "Reconhecimento de Subvenção em Importações",
-          procesor: "Reconhece o tratamento de incentivos fiscais estaduais concedidos em importações como subvenção para investimento, permitindo a exclusão desses valores da base de cálculo do IRPJ e da CSLL, com respaldo legal e jurisprudencial.",
-          age: "JUR212"
+          procesor: "Análise jurídica para garantir que a empresa possa reconhecer subvenções em operações de importação, assegurando o direito a benefícios fiscais e incentivos tributários concedidos em importações de bens e insumos. O serviço visa otimizar a carga tributária e assegurar conformidade com a legislação vigente.",
+          age: "JUR212",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-Subven%C3%A7%C3%A3o-em-Importa%C3%A7%C3%B5es.aspx"
         },
 
         {
           name: "Ressarcimento INSS Sob Sistema S",
-          procesor: "Aplica tese jurídica para recuperação de valores pagos indevidamente a título de contribuições destinadas ao Sistema “S”, INCRA e Salário-Educação, com base em interpretação legal e decisões dos tribunais superiores, viabilizando compensações e alívio da carga tributária sobre a folha.",
-          age: "JUR115"
+          procesor: "Análise e assessoria jurídica para que a empresa recupere valores pagos indevidamente ao INSS sobre o Sistema 'S' (SESI, SENAI, SEBRAE, SESC, SENAC, entre outros). O serviço visa identificar valores pagos a maior e promover o ressarcimento desses montantes junto à Receita Federal, garantindo economia financeira.",
+          age: "JUR115",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Ressarcimento-INSS-Sob-Sistema-S.aspx"
         },
 
         {
           name: "Reconhecimento de Suspensão do PIS / COFINS das Operações Destinadas a Recinto Alfandegado",
-          procesor: "Aplica tese jurídica para recuperação de valores pagos indevidamente a título de contribuições destinadas ao Sistema “S”, INCRA e Salário-Educação, com base em interpretação legal e decisões dos tribunais superiores, viabilizando compensações e alívio da carga tributária sobre a folha.",
-          age: "JUR218"
+          procesor: "Análise jurídica e suporte técnico para garantir que a empresa possa suspender o recolhimento de PIS e COFINS em operações de venda ou prestação de serviços destinados a recintos alfandegados (zonas primárias e secundárias), com base em legislação específica. O serviço visa assegurar a correta aplicação da suspensão e, quando aplicável, promover a recuperação de valores pagos indevidamente.",
+          age: "JUR218",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-Suspens%C3%A3o-do-PIS---COFINS-das-Opera%C3%A7%C3%B5es-Destinadas-a-Recinto-Alfandegado.aspx"
         },
 
         
         {
           name: "Reconhecimento de Nao Incidencia de PIS/COFINS Sobre o Credito Presumido",
           procesor: "Aplica tese jurídica que reconhece a não incidência de PIS e COFINS sobre créditos presumidos de ICMS concedidos pelos estados como incentivo fiscal, com base em jurisprudência consolidada do STF, viabilizando recuperação de valores pagos indevidamente.",
-          age: "JUR28"
+          age: "JUR28",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-N%C3%A3o-Incid%C3%AAncia-de-PIS-COFINS-Sobre-o-Credito-Presumido.aspx"
         },
 
         {
           name: "Reconhecimento de Exclusão dos Benefícios Fiscais de ICMS da Base De Cálculo do IRPJ/CSLL - Subvenções",
           procesor: "Aplica tese jurídica que permite a exclusão de subvenções fiscais de ICMS da base de cálculo do IRPJ e da CSLL, conforme entendimento do STF, garantindo redução da carga tributária e recuperação de valores pagos indevidamente.",
-          age: "JUR102"
+          age: "JUR102",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-Exclus%C3%A3o-dos-Benef%C3%ADcios-Fiscais-de-ICMS-da-Base-De-C%C3%A1lculo-do-IRPJ-CSLL---Subven%C3%A7%C3%B5es.aspx"
         },
 
         {
           name: "Reconhecimento de INSS sobre verbas indenizatórias",
           procesor: "Aplica tese jurídica que reconhece a natureza indenizatória de determinadas verbas pagas aos empregados, afastando a incidência de INSS sobre esses valores e possibilitando a recuperação de contribuições previdenciárias pagas indevidamente.",
-          age: "JUR108"
+          age: "JUR108",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-INSS-sobre-verbas-indenizat%C3%B3rias.aspx"
         },
 
         {
           name: "Exclusão do ICMS ST da Base do PIS e COFINS",
           procesor: "Aplica tese jurídica que reconhece o direito de excluir o ICMS-ST da base de cálculo do PIS e da COFINS, com fundamento em jurisprudência do STF, permitindo a recuperação de valores pagos indevidamente e a redução da carga tributária futura",
-          age: "JUR109"
+          age: "JUR109",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Exclus%C3%A3o-do-ICMS-ST-da-Base-do-PIS-e-COFINS.aspx"
         },
 
         {
           name: "Reconhecimento de Não Incidência de PIS/COFINS sobre Receitas Financeiras",
           procesor: "Aplica tese jurídica que busca o reconhecimento da não incidência de PIS e COFINS sobre receitas financeiras, como rendimentos de aplicações, juros e variações monetárias, visando à redução da carga tributária e recuperação de valores pagos indevidamente.",
-          age: "JUR112"
+          age: "JUR112",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-N%C3%A3o-Incid%C3%AAncia-de-PIS-COFINS-sobre-Receitas-Financeiras.aspx"
         },
 
         {
           name: "Reconhecimento de Crédito de PIS/COFINS S/ ICMS-ST de Compra",
           procesor: "Aplica tese jurídica que reconhece o direito ao crédito de PIS e COFINS sobre o valor do ICMS-ST incidente nas aquisições de mercadorias, ampliando a base de aproveitamento de créditos e gerando economia tributária com respaldo jurisprudencial.",
-          age: "JUR120"
+          age: "JUR120",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-Cr%C3%A9dito-de-PIS-COFINS-S--ICMS-ST-de-Compra.aspx"
         },
 
         {
           name: "Assessoria Juridica",
           procesor: "Prestação de suporte jurídico consultivo contínuo, com orientação estratégica sobre aspectos legais das atividades empresariais, análise de riscos, revisão de contratos e apoio na tomada de decisões, garantindo segurança jurídica no dia a dia da operação.",
-          age: "JUR200"
+          age: "JUR200",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Assessoria-Jur%C3%ADdica.aspx"
         },
 
         {
           name: "Reconhecimento de Não  incidência  PIS/COFINS Sobre SELIC",
           procesor: "Aplica tese jurídica que reconhece a natureza indenizatória da SELIC recebida em devoluções de tributos (repetição de indébito), afastando a incidência de PIS e COFINS sobre esses valores e viabilizando a recuperação de tributos pagos indevidamente.",
-          age: "JUR203"
+          age: "JUR203",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-N%C3%A3o-incid%C3%AAncia-PIS-COFINS-Sobre-SELIC.aspx"
         },
 
         
         {
           name: "Exclusão do ICMS na Base de Cálculo dos Créditos de PIS/COFINS - (Lei N° 14.592/23)",
           procesor: "Aplica a exclusão do ICMS da base de cálculo dos créditos de PIS e COFINS, conforme previsto na Lei nº 14.592/23, promovendo adequação à nova legislação, revisão de apurações e eventual recuperação de créditos utilizados indevidamente.",
-          age: "JUR216"
+          age: "JUR216",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Exclus%C3%A3o-do-ICMS-na-Base-de-C%C3%A1lculo-dos-Cr%C3%A9ditos-de-PIS-COFINS---(Lei-N%C2%B0-14.592-23).aspx"
         },
 
         {
           name: "Reconhecimento de Imunidade de ISS/ICMS nos fretes destinados à exportação",
           procesor: "Busca o reconhecimento da imunidade de ISS e ICMS sobre serviços de transporte vinculados à exportação de mercadorias, com base constitucional, garantindo a não tributação dos fretes e a redução legal da carga tributária nas operações internacionais.",
-          age: "JUR26"
+          age: "JUR26",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Reconhecimento-de-Imunidade-de-ISS-ICMS-nos-fretes-destinados-%C3%A0-exporta%C3%A7%C3%A3o.aspx"
         },
 
         {
           name: "Exclusão do Crédito Presumido de ICMS da Base de Cálculo PIS/COFINS",
           procesor: "Aplica tese jurídica que reconhece a exclusão dos créditos presumidos de ICMS da base de cálculo do PIS e da COFINS, com fundamento em decisão do STF, evitando bitributação e viabilizando a recuperação de valores pagos indevidamente.",
-          age: "JUR27"
+          age: "JUR27",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Exclus%C3%A3o-do-Cr%C3%A9dito-Presumido-de-ICMS-da-Base-de-C%C3%A1lculo-PIS-COFINS.aspx"
         },
 
         {
           name: "Implementação de LGPD",
           procesor: "Realiza o processo completo de adequação à Lei Geral de Proteção de Dados (LGPD), com mapeamento de dados, revisão de políticas internas, elaboração de documentos legais, treinamentos e orientações práticas para garantir conformidade, transparência e segurança jurídica.",
-          age: "JUR25"
+          age: "JUR25",
+          url:"https://funcionalx.sharepoint.com/sites/produtos/SitePages/Produtos%20JUR/Implementa%C3%A7%C3%A3o-de-LGPD.aspx"
         }
 
-
-
-
-
-
-
-
-        
         
       ];
       $scope.orderList = "name";
